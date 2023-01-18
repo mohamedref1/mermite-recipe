@@ -16,7 +16,6 @@ export const getStaticPaths = async() => {
 
   return {
     paths,
-    revalidate: 1,
     fallback: false
   }
 }
@@ -30,7 +29,8 @@ export async function getStaticProps({ slug }) {
   return {
     props: {
       recipe: items[0]
-    }
+    },
+    revalidate: 1
   }
 }
 
