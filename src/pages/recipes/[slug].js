@@ -1,3 +1,4 @@
+import Skeleton from "@/components/Skeleton";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { createClient } from "contentful";
 import Image from "next/image";
@@ -16,7 +17,7 @@ export const getStaticPaths = async() => {
 
   return {
     paths,
-    fallback: false
+    fallback: true
   }
 }
 
@@ -34,8 +35,9 @@ export async function getStaticProps({ slug }) {
   }
 }
 
-
 export default function RecipeDetails({ recipe }) {
+  if (!recipe) return <Skeleton />
+
   const { title, slug, cookingTime, thumbnail, ingredients, method } = recipe.fields;
 
   console.log(ingredients)
