@@ -21,11 +21,21 @@ export const getStaticPaths = async() => {
   }
 }
 
-export async function getStaticProps({ slug }) {
+export async function getStaticProps({ params }) {
   const { items } = await client.getEntries({ 
     content_type: 'recipe',
-    fields: { slug }
+    "fields.slug": params.slug
   });
+
+
+  if (!items.length) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false
+      }
+    }
+  }
 
   return {
     props: {
@@ -36,11 +46,10 @@ export async function getStaticProps({ slug }) {
 }
 
 export default function RecipeDetails({ recipe }) {
+
   if (!recipe) return <Skeleton />
 
   const { title, slug, cookingTime, thumbnail, ingredients, method } = recipe.fields;
-
-  console.log(ingredients)
 
   return (
     <div>
