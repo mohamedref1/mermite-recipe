@@ -20,7 +20,7 @@ export default function Layout({ children }) {
       </div>
 
       <footer>
-        <p> Copyright 2021 Just Add Marmite :) </p>
+        <p> Copyright 2023 Just Add Marmite :) </p>
       </footer>
     </div>
   );
